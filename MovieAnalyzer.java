@@ -23,17 +23,14 @@ public class MovieAnalyzer {
             str = bf.readLine();
             while ((str = bf.readLine()) != null) {
                 //System.out.println(str);
-                String[] ans = str.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                 String[] s = new String[16];
                 char[] characters = str.toCharArray();
                 int jk = -1;
-                int k = 0;
                 int index = 0;
                 boolean is = true;
                 int num = 0;
                 for (int i = 0; i < characters.length; i++) {
                     if (characters[i] == '\"') {
-                        k = i;
                         num++;
                         is = true;
                         continue;
@@ -171,17 +168,14 @@ public class MovieAnalyzer {
     }
 
     public static String[] getline(String line) {
-        //String[] ans=line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
         String[] s = new String[16];
         char[] characters = line.toCharArray();
         int j = -1;
-        int k = 0;
         int index = 0;
         boolean is = true;
         int num = 0;
         for (int i = 0; i < characters.length; i++) {
             if (characters[i] == '\"') {
-                k = i;
                 num++;
                 is = true;
                 continue;
@@ -259,8 +253,8 @@ public class MovieAnalyzer {
             }
         });
 
-        for (int i = 0; i < jk.size(); i++) {
-            String[] dk = jk.get(i).split(";");
+        for (String s : jk) {
+            String[] dk = s.split(";");
             answer.put(dk[0], Integer.parseInt(dk[1]));
         }
         return answer;
@@ -381,7 +375,7 @@ public class MovieAnalyzer {
             }
             return overview;
 
-        } else return null;
+        } else {return null;}
     }
 
     public List<String> getTopStars(int top_k, String by) throws IOException {
@@ -394,7 +388,7 @@ public class MovieAnalyzer {
                         String m2 = s.getStar2();
                         String m3 = s.getStar3();
                         String m4 = s.getStar4();
-                        String m[] = new String[4];
+                        String[] m = new String[4];
                         m[0] = m1;
                         m[1] = m2;
                         m[2] = m3;
@@ -477,8 +471,8 @@ public class MovieAnalyzer {
             ArrayList<String> arrayList = new ArrayList<>();
             listMap2.forEach((k, v) -> {
                 Long al = 0L;
-                for (int i = 0; i < v.length; i++) {
-                    al += Long.parseLong(v[i].replaceAll(",", "").replaceAll("\"", ""));
+                for (String value : v) {
+                    al += Long.parseLong(value.replaceAll(",", "").replaceAll("\"", ""));
                 }
                 if (al != 0) {
                     al /= v.length;
